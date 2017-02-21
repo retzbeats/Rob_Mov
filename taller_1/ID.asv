@@ -1,0 +1,9 @@
+function [ tau ] = ID(SNAKE, PARAM, q, qd, qdd, grav, Fext)
+%ID Summary of this function goes here
+%   Detailed explanation goes here
+
+
+
+
+end
+
