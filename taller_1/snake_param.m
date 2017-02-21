@@ -65,8 +65,8 @@ function [SNAKE, PARAM] = snake_param()% snake es una estructura de datos con
 %filas son cada cuerpo. M masa puntual, S del centro de coord al CM, Ixx etc. son los momentos de inercia.     
  %Visualizacion del robot.
  q = [0 0 0 0 0 0 0 0 0 0 0 0];        %postura de cada articulaci?n [rad]
- SNAKE.plot(q);
- SNAKE.teach(q);         %GUI para manejar cada articulacion              
+ %SNAKE.plot(q);
+ %SNAKE.teach(q);         %GUI para manejar cada articulacion              
  
 end
     
