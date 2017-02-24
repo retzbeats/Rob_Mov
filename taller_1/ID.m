@@ -29,7 +29,7 @@ for j=1:pt
         dV(:,i+1) = R'*P*dV(:,i)+ W_skew_last*R'*P*V(:,i)+H*qdd(i,j)+W_skew_present*H*qd(i,j);
     end
     for k=1:n
-        i=n-k+1
+        i=n-k+1;
         [r,p] = homogeneus_matrix(DH,q(i,j));
         R=[r, zeros(3,3);zeros(3,3),r];
         P=[eye(3) skew(p); zeros(3) eye(3)];
@@ -40,7 +40,7 @@ for j=1:pt
         w_skew=skew(V(1:3,i));
         W=[w_skew, zeros(3,3);
           zeros(3,3), w_skew];    
-        F(:,i)=P'*R*F(:,i+1) + I*dV(:,i) +(I*W*S + W*I)*V(:,i)
+        F(:,i)=P'*R*F(:,i+1) + I*dV(:,i) +(I*W*S + W*I)*V(:,i);
         %a=P'*R*F(:,i+1)
         %b=I*dV(:,i)
         %c=(I*W*S + W*I)*V(:,i)
