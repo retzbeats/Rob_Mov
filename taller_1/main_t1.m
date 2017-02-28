@@ -18,7 +18,7 @@ plot(t,q(1,:),'color',rand(1,3), 'LineWidth',3);
 plot(t,qd(1,:),'color',rand(1,3), 'LineWidth',3);
 plot(t,qdd(1,:),'color',rand(1,3), 'LineWidth',3);
 title('Comportamiento de q1, q1d, q1dd. ');
-xlabel('-2\pi < x < 2\pi') % x-axis label
+xlabel('tiempo (s)') % x-axis label
 ylabel('sine and cosine values') % y-axis label
 legend('q1','dq1','ddq1')
 hold off
@@ -37,6 +37,8 @@ plot (x,y , 'color',rand(1,3), 'LineWidth',3);
 [q,qd,qdd,x,y]=serpenoid(n,2*pi/3,b,c,w); %a = 2pi/3
 plot (x,y , 'color', rand(1,3), 'LineWidth',3);
 title('Curvas serpenoides variando a. b=pi/2, c=0');
+xlabel('x[m]') % x-axis label
+ylabel('y[m]') % y-axis labe
 legend('a=pi/3','a=pi/2','a=2pi/3')
 hold off
 
@@ -54,6 +56,8 @@ plot (x,y , 'color',rand(1,3), 'LineWidth',3);
 [q,qd,qdd,x,y]=serpenoid(n,a,4*pi,c,w); %b = 4pi
 plot (x,y , 'color', rand(1,3), 'LineWidth',3);
 title('Curvas serpenoides variando b. a=pi/2, c=0');
+xlabel('x[m]') % x-axis label
+ylabel('y[m]') % y-axis labe
 legend('b=2pi','b=3pi','c=4pi')
 hold off
 
@@ -71,6 +75,8 @@ plot (x,y , 'color',rand(1,3), 'LineWidth',3);
 [q,qd,qdd,x,y]=serpenoid(n,a,b,pi,w); %b = 4pi
 plot (x,y , 'color', rand(1,3), 'LineWidth',3);
 title('Curvas serpenoides variando c. a=pi/3, b=3*pi');
+xlabel('x[m]') % x-axis label
+ylabel('y[m]') % y-axis labe
 legend('c=0','c=pi/2','c=pi')
 hold off
 
@@ -89,8 +95,8 @@ for i=1:11
 end
 hold off
 title('Graph of Sine and Cosine Between -2\pi and 2\pi');
-xlabel('-2\pi < x < 2\pi') % x-axis label
-ylabel('sine and cosine values') % y-axis label
+xlabel('tiempo [s]') % x-axis label
+ylabel('fi [rad]') % y-axis label
 legend('q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11')
 
 
@@ -109,4 +115,6 @@ for i=1:11
     hold on
 end
 legend('tau1','tau2','tau3','tau4','tau5','tau6','tau7','tau8','tau9','tau10','tau11')
+xlabel('tiempo [s]') % x-axis label
+ylabel('Torque [Nm]') % y-axis label
 hold off
