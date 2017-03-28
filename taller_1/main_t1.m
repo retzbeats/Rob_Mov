@@ -104,7 +104,7 @@ legend('q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11')
 n=12;
 a = pi/3;
 b=2*pi;
-c=0;
+c=3;
 w=1;
 [q,qd,qdd,x,y]=serpenoid(n,a,b,c,w);
 id = ID (SNAKE,PARAM,q, qd, qdd,grav,0);
