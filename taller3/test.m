@@ -1,3 +1,4 @@
+%% Lineas Rectas
 [X Y Z VX VY VZ AX AY AZ t] = traj_planner( 1, [0 0 0;-1 5 9], 38.5, 0.2, 0.0001 );
 
 subplot(2,2,1)

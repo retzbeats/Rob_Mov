@@ -23,7 +23,7 @@ for i=1 : size(raw_data,2)/2 %to eliminate the "items" columns moves only on the
     end
 end
 %data: primera fila son los primeros datos de pulsos del encoder
-%segunda fila es el dato anterior de pulsos del encoder más el dato actual
+%segunda fila es el dato anterior de pulsos del encoder mï¿½s el dato actual
 %cada columna impar es el tiempo total (pulsos) hasta ese punto
 %cada columna par es el delta de tiempo (pulsos)
 data=data.*pulse_duration;
@@ -66,4 +66,28 @@ plot(data(:,i*2-1),k_const,'-o');
 hold off
 
 
+%% Other way to calculate the plant with the pulses that takes to make half turn
+plot(raw_data(:,1),800-raw_data(:,2),raw_data(:,3),800-raw_data(:,4),raw_data(:,5),800-raw_data(:,6),raw_data(:,7),800-raw_data(:,8),raw_data(:,9),800-raw_data(:,10))
+data_exp = 800 -raw_data;
 
+figure
+for i=1:size(tau_levels,2)
+    %recorre las columnas de tau levels (cada columna corresponde
+    %a un w con diferente ciclo util
+    %La ganancia de la planta sera el valor final de velocidad sobre el ciclo
+    %util empleado
+    k(i)= data_exp(199,i)/(20*i);
+    
+    j = 1;
+    while data_exp(j,i)<tau_levels(i)
+        j=j+1;
+    end
+    %tau(i) = data(j,i);%deberia ser solo de las columnas impares porque en las pares esta es el delta de tiempo
+    tau(i) = data(j,i*2-1);
+    plot(tau(i),1,'-o')%grafica sobre linea de valor 1 los tau para los diferentes ciclos utiles
+    k_const = k(i)*ones(1,size(data,1)) ;% para dibujar linea constante representando la ganancia
+    plot(data(:,i*2-1),k_const);
+end
+
+tau_ave = mean(tau);
+k_ave = mean(k);

@@ -153,8 +153,6 @@ else %tipo spline
     AX=[AX(1) ; AX ; AX(size(AX,1))]
     AY=[AY(1) ; AY ; AY(size(AY,1))]
     AZ=[AZ(1) ; AZ ; AZ(size(AZ,1))]
-   
-    
 end
 
 
