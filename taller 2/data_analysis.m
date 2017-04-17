@@ -44,7 +44,7 @@ for i=1:size(tau_levels,2)
     %a un w con diferente ciclo util
     %La ganancia de la planta sera el valor final de velocidad sobre el ciclo
     %util empleado
-    k(i)= w(199,i)/(0.2*i);
+    k(i)= w(199,i)/(20*i);
     
     j = 1;
     while w(j,i)<tau_levels(i)
