@@ -1,0 +1,12 @@
+x1 = sym('x1')
+y1 = sym('y1')
+fi = sym ('fi')
+L = sym('L')
+l = sym('l')
+r = sym ('r')
+wr = sym ('wr')
+wl = sym ('wl')
+A = [cos(fi), -L*sin(fi); sin(fi), L*cos(fi)]
+B = [r/2,r/2;r/(2*l),-r/(2*l)]
+C = [wr;wl]
+D = A*B*C

@@ -1,0 +1,27 @@
+Señores,
+
+con relación al prototipo del planificador de trayectoria para incluir las 2 funcionalidades de trayectoria: línea y spline
+
+Implemente en Matlab el siguiente prototipo de función:
+
+function [traj] = traj_planner(Type, arg1, arg2, arg3, arg4)
+
+Entradas:
+
+Type: Tipo de trayectoria: 1=Línea (perfil de velocidad trapezoidal), 2=Spline3D
+
+arg1: Puntos de control de la trayectoria: posición [X1 Y1 Z1 ; ...... Xn Yn Zn]
+
+arg2: línea: (velocidad máxima Vk), splines3D: (vector de tiempos de cada punto-
+
+control)
+
+arg3: línea: (% aceleración/desaceleración), splines3D: (velocidad inicial/final Vo, Vf).
+
+arg4: tiempo de muestreo para línea o spline.
+
+Salida:
+
+traj: [X Y Z Vx Vy Vz Ax Ay Az tiempo] ; posiciones, velocidades,
+
+aceleraciones, tiempo.
