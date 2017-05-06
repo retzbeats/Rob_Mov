@@ -82,7 +82,7 @@ P0 = diag([0.005, 0.005, 0.001].^2);
 map20=Map(20);
 sensor = RangeBearingSensor(veh, map20, W, 'range',[0,4],'angle',pi/4,'animate');
 ekf = EKF(veh, V, P0, sensor, W, map20);
-ekf.run(200);
+ekf.run(1000);
 
 map20.plot();
 veh.plot_xy('b');
@@ -118,42 +118,9 @@ figure
 map20.plot();
 ekf.plot_map();
 
-%% Vehicle-based map making of hole map map and with perfect vehicle
-veh.add_driver( RandomPath(10, 2) );
-sensor = RangeBearingSensor(veh, map, W, 'animate');
-%sensor.r_range = 5;
-ekf = EKF(veh, [], [], sensor, W, []);
-ekf.run(1000);
-figure
-map.plot();
-ekf.plot_map();
-
 %% Slam 20f map
 
-veh.add_driver( RandomPath(10, 2) );
-sensor = RangeBearingSensor(veh, map20, W, 'animate' );
-ekf = EKF(veh, V, P0, sensor, W, []);
-ekf.run(1000);
-map20.plot();
-veh.plot_xy('b');
-ekf.plot_xy('r');
-ekf.plot_ellipse([], 'g');
-%map20.plot();
-ekf.plot_map(3, 'g');
-figure
-ekf.plot_P();
-
-%% Slam hole map
-
-veh.add_driver( RandomPath(10, 2) );
-sensor = RangeBearingSensor(veh, map, W, 'animate' );
-ekf = EKF(veh, V, P0, sensor, W, []);
-ekf.run(200);
-%map.plot();
-veh.plot_xy('b');
-ekf.plot_xy('r');
-ekf.plot_ellipse([], 'g');
-%map20.plot();
-ekf.plot_map(3, 'g');
-figure
-ekf.plot_P();
+veh.add_driver( RandomPath(20, 2) );
+map = Map(20);
+sensor = RangeBearingSensor(veh, map, W);
+ekf = EKF(veh, V_est, P0, sensor, W, []);
