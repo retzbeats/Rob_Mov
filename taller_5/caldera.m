@@ -8,7 +8,7 @@ M3=zeros(n+1,1);
 T3=zeros(n+1,1);
 F3=zeros(n+1,1);
 t=0:Tm:80;
-%%
+
 %Condiciones iniciales
 Ks = 0.5; %Apertura de la salida (entre 0 y 1)
 dens = 2; %densidad del fluido
@@ -51,14 +51,14 @@ xlabel('t (s)')
 ylabel('Altura (m)')
 figure
 plot(t,X3)
-title('Concentración Caso 1: Flujo 1 y Flujo 2 constantes')
+title('Concentraciï¿½n Caso 1: Flujo 1 y Flujo 2 constantes')
 xlabel('t (s)')
-ylabel('% de X3 en solución')
+ylabel('% de X3 en soluciï¿½n')
 figure
 plot (t, T3)
 title('Temperatura Caso 1: Flujo 1 y Flujo 2 altos')
 xlabel('t (s)')
-ylabel('Temperatura (°C)')
+ylabel('Temperatura (ï¿½C)')
 %%
 %Caso 2 flujo 1 aumentando y flujo 2 aumentando
 F1 = 0.04*t;
@@ -81,14 +81,14 @@ xlabel('t (s)')
 ylabel('Altura (m)')
 figure
 plot(t,X3)
-title('Concentración Caso 2: Flujo 1 alto y Flujo 2 bajo')
+title('Concentraciï¿½n Caso 2: Flujo 1 alto y Flujo 2 bajo')
 xlabel('t (s)')
-ylabel('% de X3 en solución')
+ylabel('% de X3 en soluciï¿½n')
 figure
 plot (t, T3)
 title('Temperatura Caso 2: Flujo 1 alto y Flujo 2 bajo')
 xlabel('t (s)')
-ylabel('Temperatura (°C)')
+ylabel('Temperatura (ï¿½C)')
 plot (F1)
 figure 
 plot (F2)
@@ -114,14 +114,14 @@ xlabel('t (s)')
 ylabel('Altura (m)')
 figure
 plot(t,X3)
-title('Concentración Caso 2: Flujo 1 alto y Flujo 2 bajo')
+title('Concentraciï¿½n Caso 2: Flujo 1 alto y Flujo 2 bajo')
 xlabel('t (s)')
-ylabel('% de X3 en solución')
+ylabel('% de X3 en soluciï¿½n')
 figure
 plot (t, T3)
 title('Temperatura Caso 2: Flujo 1 alto y Flujo 2 bajo')
 xlabel('t (s)')
-ylabel('Temperatura (°C)')
+ylabel('Temperatura (ï¿½C)')
 plot (F1)
 figure 
 plot (F2)
@@ -147,14 +147,14 @@ xlabel('t (s)')
 ylabel('Altura (m)')
 figure
 plot(t,X3)
-title('Concentración Caso 2: Flujo 1 alto y Flujo 2 bajo')
+title('Concentraciï¿½n Caso 2: Flujo 1 alto y Flujo 2 bajo')
 xlabel('t (s)')
-ylabel('% de X3 en solución')
+ylabel('% de X3 en soluciï¿½n')
 figure
 plot (t, T3)
 title('Temperatura Caso 2: Flujo 1 alto y Flujo 2 bajo')
 xlabel('t (s)')
-ylabel('Temperatura (°C)')
+ylabel('Temperatura (ï¿½C)')
 plot (F1)
 figure 
 plot (F2)
@@ -180,14 +180,72 @@ xlabel('t (s)')
 ylabel('Altura (m)')
 figure
 plot(t,X3)
-title('Concentración Caso 2: Flujo 1 alto y Flujo 2 bajo')
+title('Concentraciï¿½n Caso 2: Flujo 1 alto y Flujo 2 bajo')
 xlabel('t (s)')
-ylabel('% de X3 en solución')
+ylabel('% de X3 en soluciï¿½n')
 figure
 plot (t, T3)
 title('Temperatura Caso 2: Flujo 1 alto y Flujo 2 bajo')
 xlabel('t (s)')
-ylabel('Temperatura (°C)')
+ylabel('Temperatura (ï¿½C)')
 plot (F1)
 figure 
 plot (F2)
+
+%% Control Caldera con FUZZY MF LOGIC!!!
+
+n = 8000; %NÃºmero de iteraciones
+
+%Condiciones iniciales
+Href = 4;
+dens = 2; %densidad del fluido
+A = 10; %area del tanque
+g=9.8; %Gravedad
+Tm = 0.01; % tiempo de muestreo
+
+%CreaciÃ³n de variables
+H=zeros(n+1,1);
+M=zeros(n+1,1);
+X3=zeros(n+1,1);
+M3=zeros(n+1,1);
+T3=zeros(n+1,1);
+F1=zeros(n+1,1);
+F2=zeros(n+1,1);
+F3=zeros(n+1,1);
+Ks=zeros(n+1,1);%Apertura de la salida (entre 0 y 1)
+H_error=zeros(n+1,1);
+t=0:Tm:80;
+
+X1=50;
+X2=50;
+T1=60;
+T2=60;
+Q=1;
+Cp=1;%Calor especifico del agua 1
+
+H(1) = 0.1; %Altura inicial del fluido
+M(1) = dens*A*H(1); %Masa total almacenada
+X3(1) = 15; %concentraciÃ³n inicial del soluto
+M3(1) = dens*A*H(1)*X3(1);%Masa inicial en el tanque (cantidad de soluto)
+T3(1) = 40; %Temperatura inicial
+
+H_error(1) = Href - H(1);
+u = evalfis(H_error(1),sys);
+F1(2) = u(1);
+Ks(2) = u(2);
+
+%Iteraciones
+for i=2:n+1
+    F3(i)=Ks(i)*sqrt(2*g*H(i-1));
+    X3(i)=M3(i-1)/(dens*A*H(i-1));
+    H(i) = Tm*(F1(i) + F2(i)-F3(i))/(dens*A) + H(i-1);
+    M3(i) = Tm*(F1(i)*X1 + F2(i)*X2 - F3(i)*X3(i)) + M3(i-1);
+    M(i) = dens*A*H(i);
+    T3(i) = ( (F1(i)*T1 + F2(i)*T2 - F3(i)*T3(i-1)+Q/Cp)*Tm + M(i-1)*T3(i-1)  )/M(i);
+    MT3(i)=M(i)*T3(i);
+    
+    H_error(i) = Href - H(i);
+    u = evalfis(H_error(i),sys);
+    F1(i+1) = u(1);
+    Ks(i+1) = u(2);
+end
