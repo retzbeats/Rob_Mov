@@ -1,0 +1,45 @@
+[System]
+Name='caldera'
+Type='mamdani'
+Version=2.0
+NumInputs=1
+NumOutputs=2
+NumRules=5
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Herror'
+Range=[-4 4]
+NumMFs=5
+MF1='EE':'trimf',[-6.93 -3.99 -2.01393728222997]
+MF2='H':'trimf',[-2 0 2]
+MF3='FF':'trimf',[2 4 6]
+MF4='E':'trimf',[-4 -2 0]
+MF5='F':'trimf',[0 2 4]
+
+[Output1]
+Name='F'
+Range=[0 10]
+NumMFs=3
+MF1='BF':'trimf',[-4 0 4]
+MF2='MF':'trimf',[1 5 9]
+MF3='AF':'trimf',[6 10 14]
+
+[Output2]
+Name='Ks'
+Range=[0 1]
+NumMFs=3
+MF1='C':'trimf',[-0.4 2.776e-17 0.4]
+MF2='M':'trimf',[0.1 0.5 0.9]
+MF3='A':'trimf',[0.6 1 1.4]
+
+[Rules]
+1, 1 3 (1) : 1
+4, 1 2 (1) : 1
+2, 1 1 (1) : 1
+5, 2 1 (1) : 1
+3, 3 1 (1) : 1
