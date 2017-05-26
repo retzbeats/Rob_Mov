@@ -55,7 +55,7 @@ x_points = [275 150 50  25  50  150 250 275 250 150 50];
 y_points = [275 275 275 225 185 185 185 145 105 105 105];
 z_points = zeros(size(x_points));
 points = [x_points;y_points;z_points]';
-t_points = [0 1 2 3 4 5 6 7 8 9 10]; %tiempos para los puntos de control
+t_points = [0 5 10 15 20 25 30 35 40 45 50]; %tiempos para los puntos de control
 v_ini_fin =  [0 0 0;0 0 0]; % velocidad inicial y final
 t_m = 0.2; % tiempo de muestreo
 
