@@ -15,8 +15,15 @@ wr(1) = ( 2*Vx(1)/cos(phi(1)) - Vy(1)/sin(phi(1)))/r;
 
 for i = 2 : n
     phi(i) = atan2(Vy(i),Vx(i));
-    W(i) = (abs(phi(i)) - abs(phi(i-1)))/tm;
-
+    %W(i) = (abs(phi(i)) - abs(phi(i-1)))/tm;
+    if abs(phi(i) - phi(i-1)) < pi
+        W(i) = (phi(i) - phi(i-1))/tm;
+    elseif phi(i) - phi(i-1) > 0
+        W(i) = (phi(i) - phi(i-1) - 2*pi)/tm
+    else
+        W(i) = (phi(i) - phi(i-1) + 2*pi)/tm    
+    end
+        
     wl(i) = ( Vy(i)/sin(phi(i)) - W(i)*l)/r;
     wr(i) = ( 2*Vx(i)/cos(phi(i)) - Vy(i)/sin(phi(i)) + W(i)*l)/r;
 end

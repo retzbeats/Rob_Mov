@@ -1,10 +1,10 @@
 %% Splines trayectoria de retorno a home
 % Puntos de control en x, y
-x_points = [50  25 50 150 250 275 275 275];
-y_points = [105 65 25 25  25  65  150 275];
+x_points = [50  30 10 50 150 250 275 275 275];
+y_points = [105 105 65 25 25  25  65  150 250];
 z_points = zeros(size(x_points));
 points = [x_points;y_points;z_points]';
-t_points = [0 1 2 3 4 5 6 7]; %tiempos para los puntos de control
+t_points = [0 1 2 3 4 5 6 7 8]; %tiempos para los puntos de control
 v_ini_fin =  [0 0 0;0 0 0]; % velocidad inicial y final
 t_m = 0.2; % tiempo de muestreo
 
